@@ -265,6 +265,7 @@ is_linux = current_os == "linux"
 is_mac = current_os == "mac"
 is_win = current_os == "win" || current_os == "winuwp"
 is_freebsd = current_os == "freebsd"
+is_nacl = current_os == "nacl"
 
 is_apple = is_ios || is_mac
 is_posix = !is_win && !is_fuchsia
