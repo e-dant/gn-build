@@ -122,6 +122,18 @@ if (current_os == "") {
 # - Don't call exec_script inside declare_args. This will execute the script
 #   even if the value is overridden, which is wasteful. See first bullet.
 
+# A helper for forwarding testonly and visibility.
+# Forwarding "*" does not include variables from outer scopes (to avoid copying
+# all globals into each template invocation), so it will not pick up
+# file-scoped or outer-template-scoped variables. Normally this behavior is
+# desired, but "visibility" and "testonly" are commonly defined in outer scopes.
+# Explicitly forwarding them in forward_variables_from() works around this
+# nuance. See //build/docs/writing_gn_templates.md#using-forward_variables_from
+TESTONLY_AND_VISIBILITY = [
+  "testonly",
+  "visibility",
+]
+
 declare_args() {
   # Set to enable the official build level of optimization. This has nothing
   # to do with branding, but enables an additional level of optimization above
