@@ -5,18 +5,6 @@
 # Toolchain-related configuration that may be needed outside the context of the
 # toolchain() rules themselves.
 
-declare_args() {
-  # How many symbols to include in the build. This affects the performance of
-  # the build since the symbols are large and dealing with them is slow.
-  #   2 means regular build with symbols.
-  #   1 means minimal symbols, usually enough for backtraces only.
-  #   0 means no symbols.
-  symbol_level = 2
-}
-
-# If it wasn't manually set, set to an appropriate default.
-assert(symbol_level >= 0 && symbol_level <= 2, "Invalid symbol_level")
-
 # Extension for shared library files (including leading dot).
 if (is_mac) {
   shlib_extension = ".dylib"
